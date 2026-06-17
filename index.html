@@ -3,65 +3,49 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Chị Linh có xinh không?</title>
-
+<title>Mini Game</title>
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family: "Segoe UI", sans-serif;
-}
-
 body{
+    margin:0;
     height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
     background:linear-gradient(135deg,#ffd1dc,#ffe8f0);
+    font-family:Arial;
+    overflow:hidden;
 }
 
 .card{
     background:white;
     padding:50px;
-    border-radius:30px;
+    border-radius:25px;
     text-align:center;
     box-shadow:0 15px 40px rgba(0,0,0,.1);
-    width:90%;
-    max-width:600px;
+    width:400px;
 }
 
 h1{
     color:#ff5c8a;
-    margin-bottom:30px;
-    font-size:36px;
-}
-
-p{
-    font-size:22px;
-    margin-bottom:30px;
-    color:#555;
 }
 
 button{
     border:none;
-    padding:14px 32px;
+    padding:14px 30px;
     margin:10px;
     border-radius:999px;
     font-size:18px;
-    font-weight:600;
     cursor:pointer;
-    transition:.25s;
+    transition:.2s;
     box-shadow:0 8px 20px rgba(0,0,0,.15);
 }
 
-.yes{
+#yesBtn{
     background:linear-gradient(135deg,#ff758c,#ff7eb3);
     color:white;
 }
 
-.no{
+#noBtn{
     background:white;
     color:#ff5c8a;
 }
@@ -73,65 +57,61 @@ button:hover{
 .result{
     font-size:28px;
     color:#ff5c8a;
-    line-height:1.8;
 }
 </style>
 </head>
+
 <body>
 
 <div class="card">
-    <h1>🌸 Chị Linh có xinh không? 🌸</h1>
+    <h1 id="question">Chị Linh có xinh không? 😏</h1>
 
-    <p id="question">
-        Chị Linh có xinh không? 🥰
-    </p>
-
-    <div id="actions">
-        <button class="yes" onclick="showResult()">Có ❤️</button>
-        <button class="no" onclick="nextQuestion()">Không 😏</button>
+    <div id="btns">
+        <button id="yesBtn">Có ❤️</button>
+        <button id="noBtn">Không 😌</button>
     </div>
+
+    <div id="result"></div>
 </div>
 
 <script>
-const questions = [
-    "Chị Linh chắc chưa? 🤔",
-    "Chị Linh soi gương hôm nay chưa? 😏",
-    "Chị Linh có đang khiêm tốn quá không? 😌",
-    "Chị Linh có muốn trả lời lại không? 😂",
-    "AI đang kiểm tra dữ liệu... 🤖",
-    "Hệ thống phát hiện câu trả lời chưa chính xác 😆"
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+const question = document.getElementById("question");
+const result = document.getElementById("result");
+
+let questions = [
+    "Chắc chưa?",
+    "Nghĩ lại đi 😏",
+    "Thật sự luôn?",
+    "Không thay đổi à?",
+    "Đang kiểm tra lại...",
+    "AI nghi ngờ câu trả lời 🤖"
 ];
 
 let index = 0;
 
-function nextQuestion(){
-    if(index < questions.length){
-        document.getElementById("question").innerText = questions[index];
-        index++;
-    }else{
-        showResult();
-    }
-}
+// nút có → chạy trốn + hỏi liên tục
+yesBtn.addEventListener("mouseover", () => {
+    const x = Math.random() * (window.innerWidth - 120);
+    const y = Math.random() * (window.innerHeight - 60);
 
-function showResult(){
+    yesBtn.style.position = "fixed";
+    yesBtn.style.left = x + "px";
+    yesBtn.style.top = y + "px";
+
+    question.innerText = questions[index % questions.length];
+    index++;
+});
+
+// nút không → kết luận
+noBtn.addEventListener("click", () => {
     document.querySelector(".card").innerHTML = `
         <div class="result">
-            ❤️ KẾT QUẢ XÁC MINH ❤️
-            <br><br>
-            ✔ Dễ thương
-            <br>
-            ✔ Xinh
-            <br>
-            ✔ Cười đẹp
-            <br>
-            ✔ Trả lời chưa khách quan
-            <br><br>
-            🌸 Kết luận cuối cùng:
-            <br>
-            <b>Chị Linh xinh nhé ❤️</b>
+            😌 Thành thật là một đức tính tốt
         </div>
     `;
-}
+});
 </script>
 
 </body>
