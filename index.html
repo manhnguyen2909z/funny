@@ -1,0 +1,126 @@
+```html
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Câu hỏi quan trọng</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+.container{
+    text-align:center;
+}
+
+h1{
+    font-size:42px;
+    color:white;
+    margin-bottom:40px;
+}
+
+.buttons{
+    position:relative;
+    width:400px;
+    height:200px;
+}
+
+button{
+    padding:15px 40px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:20px;
+    transition:0.2s;
+}
+
+#yesBtn{
+    background:#4CAF50;
+    color:white;
+}
+
+#noBtn{
+    position:absolute;
+    background:#ff4d4f;
+    color:white;
+    left:220px;
+    top:0;
+}
+
+.result{
+    margin-top:30px;
+    font-size:30px;
+    color:white;
+    font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Bạn có xinh không? 🥰</h1>
+
+    <div class="buttons">
+        <button id="yesBtn">Có</button>
+        <button id="noBtn">Không</button>
+    </div>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const result = document.getElementById("result");
+
+function moveButton() {
+    const maxX = window.innerWidth - 120;
+    const maxY = window.innerHeight - 80;
+
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top = Math.random() * maxY + "px";
+    noBtn.style.position = "fixed";
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+yesBtn.addEventListener("click", () => {
+    document.body.innerHTML = `
+        <div style="
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            flex-direction:column;
+            background:#ff9a9e;
+            color:white;
+            font-size:40px;
+            text-align:center;
+        ">
+            ❤️ Chính xác! ❤️
+            <br><br>
+            Mình biết ngay mà 😍
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
+```
